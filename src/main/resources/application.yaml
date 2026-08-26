@@ -13,14 +13,4 @@ spring:
     enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
-  jpa:
-    hibernate:
-      ddl-auto: update
-
-stripe:
-  apiUrl: https://api.stripe.com
-  enabled: true
-  timeout: 1000
-  supported-currencies: USD,EUR,GBP
-payment-gateway: stripe
 
