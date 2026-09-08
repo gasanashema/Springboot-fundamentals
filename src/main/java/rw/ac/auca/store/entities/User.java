@@ -3,10 +3,16 @@ package rw.ac.auca.store.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Builder
 @Entity
 @Table(name = "users")
@@ -23,5 +29,25 @@ public class User {
     @Column(nullable = false, name = "password")
     private String password;
 
+    @OneToMany(mappedBy = "user")
+    @Builder.Default
+    private List<Address> addresses = new ArrayList<>();
 
+    public void addAddresses(Address address){
+        addresses.add(address);
+        address.setUser(this);
+    }
+
+    public void removeAddress(Address address){
+        addresses.remove(address);
+        address.setUser(null);
+    }
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_tags",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private Set<Tag> tags = new HashSet<>();
 }

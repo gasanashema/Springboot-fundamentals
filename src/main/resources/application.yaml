@@ -16,11 +16,3 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
-stripe:
-  apiUrl: https://api.stripe.com
-  enabled: true
-  timeout: 1000
-  supported-currencies: USD,EUR,GBP
-payment-gateway: stripe
-
